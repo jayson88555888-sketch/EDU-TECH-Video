@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>System Analysis | EDU-TECH</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --background: #050b18;
+    --surface: #0b1630;
+    --surface-light: #102044;
+    --blue: #3478f6;
+    --cyan: #38d9ff;
+    --purple: #8b7cff;
+    --white: #edf5ff;
+    --muted: #8fa6c9;
+    --border: rgba(104, 157, 255, 0.18);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: 'Inter', sans-serif;
+    color: var(--white);
+    background:
+        radial-gradient(ellipse at 15% 0%, #102b57 0%, transparent 38%),
+        radial-gradient(ellipse at 100% 35%, #151440 0%, transparent 35%),
+        var(--background);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font: inherit;
+}
+
+.container {
+    width: min(1120px, 92%);
+    margin: auto;
+}
+
+/* Background technology grid */
+
+.background-grid {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.17;
+    background-image:
+        linear-gradient(rgba(75, 137, 255, 0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(75, 137, 255, 0.12) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: linear-gradient(to bottom, black, transparent 85%);
+}
+
+/* Navigation */
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(130, 170, 255, 0.1);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 19px;
+}
+
+.logo-symbol {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    color: white;
+    background: linear-gradient(135deg, #367bff, #725dff);
+    box-shadow: 0 0 24px #3478f633;
+    font-size: 21px;
+}
+
+.logo span {
+    color: var(--cyan);
+}
+
+.nav-label {
+    padding: 9px 14px;
+    border: 1px solid var(--border);
+    border-radius: 30px;
+    color: #b6cced;
+    background: rgba(12, 29, 58, 0.75);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Hero */
+
+.hero {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center;
+    gap: 50px;
+    padding: 80px 0 85px;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--cyan);
+    background: rgba(56, 217, 255, 0.07);
+    border: 1px solid rgba(56, 217, 255, 0.2);
+    border-radius: 7px;
+    padding: 9px 13px;
+    margin-bottom: 25px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.7px;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 10px var(--cyan);
+}
+
+h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(42px, 6vw, 69px);
+    line-height: 1.08;
+    letter-spacing: -2.5px;
+    margin-bottom: 24px;
+}
+
+h1 span {
+    display: block;
+    background: linear-gradient(90deg, #4e91ff, #38d9ff 65%, #9d9aff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero-description {
+    max-width: 520px;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.9;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 13px;
+    margin-top: 30px;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 10px;
+    padding: 14px 20px;
+    font-size: 13px;
+    font-weight: 700;
+    transition: 0.25s ease;
+}
+
+.button-primary {
+    color: white;
+    background: linear-gradient(110deg, #2769e8, #368df8);
+    box-shadow: 0 8px 28px #2769e833;
+}
+
+.button-secondary {
+    color: #c1d5f5;
+    border: 1px solid var(--border);
+    background: rgba(12, 29, 58, 0.7);
+}
+
+.button:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.12);
+}
+
+/* Abstract system diagram - CSS only */
+
+.diagram {
+    position: relative;
+    padding: 27px;
+    border-radius: 20px;
+    border: 1px solid rgba(93, 146, 255, 0.23);
+    background: linear-gradient(145deg, #0e2041dd, #091329f5);
+    box-shadow: 0 25px 80px #00000030, inset 0 1px #ffffff08;
+}
+
+.diagram::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(140deg, #4387ff77, transparent 45%, #8b7cff44);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+.diagram-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.diagram-header h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+}
+
+.live-label {
+    color: #53e5c1;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.diagram-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 17px;
+    margin-bottom: 13px;
+    border: 1px solid rgba(93, 146, 255, 0.17);
+    border-radius: 12px;
+    background: linear-gradient(100deg, #12284b, #0c1b35);
+    transition: 0.25s;
+}
+
+.diagram-row:last-child {
+    margin-bottom: 0;
+}
+
+.diagram-row:hover {
+    border-color: #3478f6aa;
+    transform: translateX(4px);
+}
+
+.diagram-number {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    color: var(--cyan);
+    background: #1a4776;
+    border: 1px solid #3478f644;
+    border-radius: 10px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+}
+
+.diagram-row:nth-of-type(3) .diagram-number {
+    color: #aaa0ff;
+    background: #30285d;
+}
+
+.diagram-row:nth-of-type(4) .diagram-number {
+    color: #69e7c3;
+    background: #12473f;
+}
+
+.diagram-row strong {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.diagram-row small {
+    color: #839cbe;
+    font-size: 11px;
+}
+
+/* Learning topics */
+
+.topics-section {
+    padding: 20px 0 85px;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 36px;
+}
+
+.section-kicker {
+    color: var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-size: 10px;
+    font-weight: 800;
+    margin-bottom: 13px;
+}
+
+.section-heading h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(27px, 4vw, 37px);
+    margin-bottom: 12px;
+    letter-spacing: -0.8px;
+}
+
+.section-heading p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.topics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 17px;
+}
+
+.topic-card {
+    padding: 24px;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    background: linear-gradient(145deg, #0d1c37e8, #091328e8);
+    transition: 0.25s;
+}
+
+.topic-card:hover {
+    transform: translateY(-5px);
+    border-color: #3478f677;
+    box-shadow: 0 15px 40px #00000025;
+}
+
+.topic-icon {
+    display: grid;
+    place-items: center;
+    width: 47px;
+    height: 47px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    color: #65caff;
+    background: #15345b;
+    border: 1px solid #3478f633;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.topic-card:nth-child(2) .topic-icon {
+    color: #b4a8ff;
+    background: #29244f;
+}
+
+.topic-card:nth-child(3) .topic-icon {
+    color: #66e5c1;
+    background: #123e3a;
+}
+
+.topic-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.topic-card p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.9;
+}
+
+/* Video lessons */
+
+.videos-section {
+    padding: 80px 0;
+    background: linear-gradient(180deg, #091329aa, #0b1730aa);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.video-card {
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    background: linear-gradient(145deg, #102143, #0a142a);
+    transition: 0.25s;
+}
+
+.video-card:hover {
+    transform: translateY(-4px);
+    border-color: #3478f688;
+    box-shadow: 0 18px 45px #00000030;
+}
+
+.video-display {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 16 / 9;
+    margin-bottom: 22px;
+    border: 1px solid #3478f633;
+    border-radius: 12px;
+    background:
+        radial-gradient(ellipse at center, #183f79 0%, #0b1a36 65%, #081124 100%);
+}
+
+.video-display::before,
+.video-display::after {
+    content: "";
+    position: absolute;
+    background: #3478f655;
+}
+
+.video-display::before {
+    width: 80%;
+    height: 1px;
+}
+
+.video-display::after {
+    width: 1px;
+    height: 80%;
+}
+
+.video-code {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 1;
+    color: #71bfff;
+    font-family: monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.video-center {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.play-icon {
+    display: grid;
+    place-items: center;
+    width: 63px;
+    height: 63px;
+    margin: 0 auto 14px;
+    border: 1px solid #62cfff88;
+    border-radius: 50%;
+    color: white;
+    background: linear-gradient(135deg, #3478f6, #625cf4);
+    box-shadow: 0 0 32px #3478f655;
+    font-size: 22px;
+    transition: 0.25s;
+}
+
+.video-card:hover .play-icon {
+    transform: scale(1.08);
+    box-shadow: 0 0 42px #3478f688;
+}
+
+.video-center span {
+    color: #b8d7ff;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.language {
+    display: inline-block;
+    color: var(--cyan);
+    background: #123553;
+    border: 1px solid #38d9ff22;
+    border-radius: 5px;
+    padding: 6px 9px;
+    margin-bottom: 12px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.video-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    margin-bottom: 9px;
+}
+
+.video-card p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.watch-button {
+    width: 100%;
+    border: 1px solid #4789ff55;
+    border-radius: 9px;
+    padding: 13px 16px;
+    color: white;
+    background: linear-gradient(100deg, #2465dc, #347ff4);
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 800;
+    transition: 0.25s;
+}
+
+.watch-button:hover {
+    filter: brightness(1.15);
+    box-shadow: 0 5px 25px #3478f633;
+}
+
+.watch-button:focus-visible,
+.close-button:focus-visible,
+.button:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 4px;
+}
+
+/* Player */
+
+.player-panel {
+    display: none;
+    margin-top: 28px;
+    padding: 22px;
+    border: 1px solid #3478f655;
+    border-radius: 16px;
+    background: #081328;
+    box-shadow: 0 15px 45px #00000033;
+}
+
+.player-panel.active {
+    display: block;
+}
+
+.player-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.player-top h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+}
+
+.close-button {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: #b7cbe8;
+    background: #10203d;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+video {
+    display: block;
+    width: 100%;
+    max-height: 600px;
+    border-radius: 10px;
+    background: #000;
+}
+
+.player-message {
+    margin-top: 13px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+/* Footer */
+
+footer {
+    padding: 30px 0;
+    text-align: center;
+    color: #748cac;
+    font-size: 12px;
+}
+
+footer strong {
+    color: var(--cyan);
+}
+
+.footer-line {
+    width: 55px;
+    height: 2px;
+    margin: 0 auto 17px;
+    background: linear-gradient(90deg, var(--blue), var(--cyan), var(--purple));
+}
+
+/* Responsive */
+
+@media (max-width: 800px) {
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 45px;
+        padding: 60px 0;
+    }
+
+    .hero-description {
+        max-width: 600px;
+    }
+
+    .diagram {
+        max-width: 520px;
+        width: 100%;
+        margin: auto;
+    }
+
+    .topics-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 560px) {
+    .logo {
+        font-size: 15px;
+    }
+
+    .logo-symbol {
+        width: 36px;
+        height: 36px;
+    }
+
+    .nav-label {
+        font-size: 10px;
+        padding: 8px 10px;
+    }
+
+    .hero {
+        padding: 48px 0;
+    }
+
+    h1 {
+        letter-spacing: -1.5px;
+    }
+
+    .topics-grid,
+    .video-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .topics-section,
+    .videos-section {
+        padding: 60px 0;
+    }
+
+    .video-card {
+        padding: 15px;
+    }
+
+    .player-panel {
+        padding: 14px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background-grid"></div>
+
+<div class="container">
+
+    <!-- Navigation -->
+    <nav>
+        <a class="logo" href="#">
+            <div class="logo-symbol">⌘</div>
+            EDU-<span>TECH</span>
+        </a>
+
+        <div class="nav-label">SYSTEM ANALYSIS / LEARNING PORTAL</div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+
+        <div>
+            <div class="eyebrow">
+                <span class="status-dot"></span>
+                KNOW THE SYSTEM. SOLVE THE PROBLEM.
+            </div>
+
+            <h1>
+                SYSTEM
+                <span>ANALYSIS.</span>
+            </h1>
+
+            <p class="hero-description">
+                Explore how information systems are studied, analysed,
+                and improved. Understand user requirements, investigate
+                existing processes, and discover how better systems
+                are designed to solve real-world problems.
+            </p>
+
+            <div class="hero-actions">
+                <a href="#videos" class="button button-primary">
+                    ▶ Start Learning
+                </a>
+
+                <a href="#topics" class="button button-secondary">
+                    Explore Topics ↗
+                </a>
+            </div>
+        </div>
+
+        <!-- CSS-only system diagram -->
+        <div class="diagram">
+
+            <div class="diagram-header">
+                <h2>SYSTEM WORKFLOW</h2>
+                <span class="live-label">● ACTIVE</span>
+            </div>
+
+            <div class="diagram-row">
+                <div class="diagram-number">01</div>
+                <div>
+                    <strong>Investigate</strong>
+                    <small>Understand the current system</small>
+                </div>
+            </div>
+
+            <div class="diagram-row">
+                <div class="diagram-number">02</div>
+                <div>
+                    <strong>Analyse</strong>
+                    <small>Identify problems and requirements</small>
+                </div>
+            </div>
+
+            <div class="diagram-row">
+                <div class="diagram-number">03</div>
+                <div>
+                    <strong>Design</strong>
+                    <small>Plan a suitable system solution</small>
+                </div>
+            </div>
+
+            <div class="diagram-row">
+                <div class="diagram-number">04</div>
+                <div>
+                    <strong>Improve</strong>
+                    <small>Support better system performance</small>
+                </div>
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- Topics -->
+    <section class="topics-section" id="topics">
+
+        <div class="section-heading">
+            <div class="section-kicker">CORE CONCEPTS</div>
+            <h2>Explore System Analysis</h2>
+            <p>
+                Build your knowledge through three important areas
+                of system analysis.
+            </p>
+        </div>
+
+        <div class="topics-grid">
+
+            <article class="topic-card">
+                <div class="topic-icon">01</div>
+                <h3>System Investigation</h3>
+                <p>
+                    Study existing processes, identify system problems,
+                    and understand why improvements may be needed.
+                </p>
+            </article>
+
+            <article class="topic-card">
+                <div class="topic-icon">02</div>
+                <h3>Requirements Analysis</h3>
+                <p>
+                    Discover user needs, gather information, and
+                    document functional and non-functional requirements.
+                </p>
+            </article>
+
+            <article class="topic-card">
+                <div class="topic-icon">03</div>
+                <h3>System Modelling</h3>
+                <p>
+                    Use diagrams and structured models to explain
+                    system processes, data flow, and interactions.
+                </p>
+            </article>
+
+        </div>
+
+    </section>
+
+</div>
+
+<!-- Video lessons -->
+<section class="videos-section" id="videos">
+
+    <div class="container">
+
+        <div class="section-heading">
+            <div class="section-kicker">VIDEO LEARNING CENTER</div>
+            <h2>Choose Your Language</h2>
+            <p>
+                Select a lesson below and learn System Analysis
+                in your preferred language.
+            </p>
+        </div>
+
+        <div class="video-grid">
+
+            <!-- Chinese -->
+            <article class="video-card">
+
+                <div class="video-display">
+                    <div class="video-code">LESSON_01 / CHINESE</div>
+
+                    <div class="video-center">
+                        <div class="play-icon">▶</div>
+                        <span>中文教学课程</span>
+                    </div>
+                </div>
+
+                <div class="language">CHINESE VERSION</div>
+
+                <h3>System Analysis — Chinese</h3>
+
+                <p>
+                    Study the fundamental concepts of System Analysis
+                    with the Chinese-language lesson.
+                </p>
+
+                <button
+                    class="watch-button"
+                    onclick="playVideo('chinese')"
+                >
+                    ▶ &nbsp; WATCH CHINESE LESSON
+                </button>
+
+            </article>
+
+            <!-- Bahasa Melayu -->
+            <article class="video-card">
+
+                <div class="video-display">
+                    <div class="video-code">LESSON_02 / MALAY</div>
+
+                    <div class="video-center">
+                        <div class="play-icon">▶</div>
+                        <span>BAHASA MELAYU</span>
+                    </div>
+                </div>
+
+                <div class="language">BAHASA MELAYU</div>
+
+                <h3>System Analysis — BM</h3>
+
+                <p>
+                    Fahami konsep asas Analisis Sistem melalui
+                    video pembelajaran Bahasa Melayu.
+                </p>
+
+                <button
+                    class="watch-button"
+                    onclick="playVideo('malay')"
+                >
+                    ▶ &nbsp; TONTON PELAJARAN BM
+                </button>
+
+            </article>
+
+        </div>
+
+        <!-- Video player -->
+        <div class="player-panel" id="playerPanel">
+
+            <div class="player-top">
+                <h3 id="playerTitle">System Analysis</h3>
+
+                <button
+                    class="close-button"
+                    onclick="closeVideo()"
+                >
+                    ✕ Close Video
+                </button>
+            </div>
+
+            <video
+                id="lessonPlayer"
+                controls
+                playsinline
+                preload="metadata"
+            >
+                Your browser does not support HTML video.
+            </video>
+
+            <p class="player-message" id="playerMessage">
+                Select a lesson to begin.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-line"></div>
+        <p>
+            <strong>EDU-TECH</strong> &nbsp;|&nbsp;
+            System Analysis Learning Portal
+        </p>
+        <p style="margin-top: 8px;">
+            Learn smarter. Understand deeper. Build better systems.
+        </p>
+    </div>
+</footer>
+
+<script>
+const lessons = {
+    chinese: {
+        title: "System Analysis — Chinese",
+        file: "SystemAnalysis Chinese.mp4",
+        message: "Chinese lesson selected. Enjoy learning!"
+    },
+
+    malay: {
+        title: "System Analysis — Bahasa Melayu",
+        file: "SystemAnalysis Melayu.MOV",
+        message: "Video Bahasa Melayu dipilih. Selamat belajar!"
+    }
+};
+
+const player = document.getElementById("lessonPlayer");
+const panel = document.getElementById("playerPanel");
+const playerTitle = document.getElementById("playerTitle");
+const playerMessage = document.getElementById("playerMessage");
+
+function playVideo(language) {
+    const lesson = lessons[language];
+
+    if (!lesson) return;
+
+    player.pause();
+    player.src = lesson.file;
+    player.load();
+
+    playerTitle.textContent = lesson.title;
+    playerMessage.textContent = lesson.message;
+
+    panel.classList.add("active");
+    panel.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+    player.play().catch(() => {
+        playerMessage.textContent =
+            "Your video is ready. Press the play button to start. " +
+            "If it does not load, check that the video filename " +
+            "matches the filename in your folder.";
+    });
+}
+
+function closeVideo() {
+    player.pause();
+    player.removeAttribute("src");
+    player.load();
+    panel.classList.remove("active");
+}
+</script>
+
+</body>
+</html>

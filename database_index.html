@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Database Fundamentals | EDU-TECH</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --blue: #65bfff;
+    --blue-dark: #238bd0;
+    --blue-light: #eaf7ff;
+    --sky: #bce7ff;
+    --white: #ffffff;
+    --navy: #234765;
+    --text: #36566f;
+    --muted: #7893a9;
+    --purple: #b6a4ff;
+    --yellow: #ffe69a;
+    --green: #a6e8d0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background: #f4faff;
+    color: var(--navy);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* SOFT HAPPY BACKGROUND */
+
+.background-decoration {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(2px);
+    opacity: .55;
+}
+
+.blob.one {
+    width: 350px;
+    height: 350px;
+    background: #c9ecff;
+    top: 100px;
+    right: -130px;
+}
+
+.blob.two {
+    width: 260px;
+    height: 260px;
+    background: #e1d9ff;
+    bottom: 80px;
+    left: -100px;
+}
+
+.blob.three {
+    width: 180px;
+    height: 180px;
+    background: #fff0bd;
+    top: 600px;
+    right: 15%;
+}
+
+/* NAVIGATION */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,.9);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid #deeffb;
+}
+
+.nav {
+    max-width: 1200px;
+    margin: auto;
+    padding: 19px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 21px;
+    letter-spacing: -1px;
+    color: var(--navy);
+}
+
+.logo span {
+    color: var(--blue-dark);
+}
+
+.nav-label {
+    color: var(--blue-dark);
+    font-size: 12px;
+    font-weight: 800;
+    background: var(--blue-light);
+    padding: 9px 15px;
+    border-radius: 30px;
+}
+
+.nav-label span {
+    color: #39b68d;
+    margin-right: 5px;
+}
+
+main {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 28px;
+}
+
+/* HERO */
+
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 45px;
+    align-items: center;
+    padding: 65px 0 60px;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #328fc9;
+    background: white;
+    border: 1px solid #d5efff;
+    padding: 10px 15px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+    box-shadow: 0 5px 18px #8ecff51c;
+}
+
+h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(34px, 4.5vw, 56px);
+    line-height: 1.18;
+    letter-spacing: -2px;
+    color: #264b6b;
+    margin-bottom: 20px;
+}
+
+h1 span {
+    color: #299de2;
+}
+
+.hero-description {
+    color: var(--text);
+    line-height: 1.9;
+    font-size: 15px;
+    max-width: 470px;
+    margin-bottom: 28px;
+}
+
+.primary-btn {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    background: linear-gradient(135deg, #65c4ff, #369de5);
+    padding: 15px 24px;
+    border-radius: 13px;
+    font-weight: 900;
+    font-size: 13px;
+    box-shadow: 0 8px 20px #5ab6f544;
+    transition: .25s;
+}
+
+.primary-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px #5ab6f566;
+}
+
+/* HERO IMAGE */
+
+.hero-image {
+    position: relative;
+    height: 350px;
+    border-radius: 28px;
+    overflow: hidden;
+    border: 7px solid white;
+    box-shadow: 0 15px 45px #7bb9df2e;
+    background: #d7efff;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .5s;
+}
+
+.hero-image:hover img {
+    transform: scale(1.04);
+}
+
+.floating-card {
+    position: absolute;
+    left: 18px;
+    bottom: 18px;
+    right: 18px;
+    background: rgba(255,255,255,.94);
+    padding: 15px 17px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    box-shadow: 0 6px 20px #23476512;
+}
+
+.database-icon {
+    width: 47px;
+    height: 47px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    background: #dff3ff;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.floating-card strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.floating-card small {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+/* INTRODUCTION */
+
+.intro {
+    background: white;
+    border: 1px solid #e1f1fc;
+    border-radius: 22px;
+    padding: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    box-shadow: 0 8px 30px #8ecff514;
+    margin-bottom: 55px;
+}
+
+.intro-label {
+    color: #369de5;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(24px, 3vw, 32px);
+    letter-spacing: -1px;
+    color: #264b6b;
+}
+
+.intro p {
+    max-width: 470px;
+    color: var(--muted);
+    line-height: 1.8;
+    font-size: 13px;
+}
+
+/* SECTION HEADING */
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.section-pill {
+    display: inline-block;
+    background: #dff3ff;
+    color: #278dcb;
+    border-radius: 30px;
+    padding: 8px 14px;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    margin-bottom: 15px;
+}
+
+.section-heading p {
+    color: var(--muted);
+    font-size: 14px;
+    margin-top: 12px;
+    line-height: 1.8;
+}
+
+/* LANGUAGE HEADINGS */
+
+.language-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin: 35px 0 20px;
+}
+
+.language-heading h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 19px;
+    color: #315674;
+}
+
+.language-badge {
+    display: inline-block;
+    color: #278dcb;
+    background: #dff3ff;
+    border-radius: 30px;
+    padding: 8px 13px;
+    font-size: 10px;
+    font-weight: 900;
+    white-space: nowrap;
+}
+
+.bm-heading .language-badge {
+    color: #7e68d3;
+    background: #eee8ff;
+}
+
+/* VIDEO CARDS */
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px;
+}
+
+.video-card {
+    background: white;
+    border: 1px solid #dfedf7;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 9px 30px #75b6dd16;
+    transition: .3s;
+}
+
+.video-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 35px #75b6dd30;
+    border-color: #9edcff;
+}
+
+.thumbnail {
+    position: relative;
+    height: 245px;
+    background: #dcefff;
+    overflow: hidden;
+}
+
+.thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .5s;
+}
+
+.video-card:hover .thumbnail img {
+    transform: scale(1.05);
+}
+
+.thumbnail::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        0deg,
+        rgba(30,77,110,.20),
+        transparent 60%
+    );
+    pointer-events: none;
+}
+
+.video-label {
+    position: absolute;
+    z-index: 2;
+    top: 15px;
+    left: 15px;
+    background: white;
+    color: #328fc9;
+    padding: 8px 13px;
+    border-radius: 30px;
+    font-size: 10px;
+    font-weight: 900;
+    box-shadow: 0 4px 15px #23476512;
+}
+
+.bm-card .video-label {
+    color: #8069d5;
+}
+
+.play-button {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 62px;
+    height: 62px;
+    display: grid;
+    place-items: center;
+    background: rgba(255,255,255,.94);
+    color: #319fe5;
+    border-radius: 50%;
+    font-size: 22px;
+    box-shadow: 0 6px 25px #23476520;
+    transition: .25s;
+}
+
+.video-card:hover .play-button {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.bm-card .play-button {
+    color: #947ee8;
+}
+
+.video-info {
+    padding: 25px;
+}
+
+.module-label {
+    color: #399edc;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+}
+
+.bm-card .module-label {
+    color: #9279e6;
+}
+
+.video-info h4 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    color: #2d506e;
+    margin: 12px 0 10px;
+}
+
+.video-info p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+.video-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+    color: #7a96ab;
+    font-size: 11px;
+}
+
+.watch-btn {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: #e3f5ff;
+    color: #268bc9;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 13px;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.watch-btn:hover {
+    background: #68c5ff;
+    color: white;
+}
+
+.bm-card .watch-btn {
+    background: #f0eaff;
+    color: #8069d5;
+}
+
+.bm-card .watch-btn:hover {
+    background: #b6a4ff;
+    color: white;
+}
+
+/* VIDEO PLAYER */
+
+.player-section {
+    margin-top: 75px;
+    padding: 50px 0;
+    border-top: 1px solid #d9edf9;
+}
+
+.player-heading {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.player-heading p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 12px;
+    line-height: 1.8;
+}
+
+.player-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+    aspect-ratio: 16 / 9;
+    border: 6px solid white;
+    border-radius: 22px;
+    overflow: hidden;
+    background: #e1f3ff;
+    box-shadow: 0 12px 40px #6eb8e526;
+}
+
+.player-container video {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    display: none;
+    background: #eaf7ff;
+}
+
+.player-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    padding: 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #e8f7ff, #f6f1ff);
+}
+
+.placeholder-icon {
+    width: 75px;
+    height: 75px;
+    border-radius: 23px;
+    display: grid;
+    place-items: center;
+    background: white;
+    color: #4caeea;
+    font-size: 32px;
+    box-shadow: 0 7px 25px #6eb8e526;
+}
+
+.player-placeholder h4 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    color: #315674;
+}
+
+.player-placeholder p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+#player-message {
+    max-width: 900px;
+    margin: 15px auto 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+/* FOOTER */
+
+footer {
+    margin-top: 30px;
+    background: white;
+    border-top: 1px solid #dfedf7;
+}
+
+.footer-inner {
+    max-width: 1200px;
+    margin: auto;
+    padding: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.footer-logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 900;
+    color: #315674;
+}
+
+.footer-logo span {
+    color: #299de2;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 800px) {
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 45px 0;
+    }
+
+    .hero-image {
+        height: 300px;
+    }
+
+    .intro {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .video-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .thumbnail {
+        height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    main {
+        padding: 0 17px;
+    }
+
+    .nav {
+        padding: 17px;
+    }
+
+    .logo {
+        font-size: 17px;
+    }
+
+    .nav-label {
+        font-size: 10px;
+        padding: 8px 10px;
+    }
+
+    h1 {
+        font-size: 35px;
+    }
+
+    .hero-image {
+        height: 230px;
+    }
+
+    .intro {
+        padding: 22px;
+    }
+
+    .language-heading h3 {
+        font-size: 14px;
+    }
+
+    .language-badge {
+        font-size: 9px;
+        padding: 7px 9px;
+    }
+
+    .thumbnail {
+        height: 200px;
+    }
+
+    .video-info {
+        padding: 20px;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background-decoration">
+    <div class="blob one"></div>
+    <div class="blob two"></div>
+    <div class="blob three"></div>
+</div>
+
+<header>
+    <nav class="nav">
+        <div class="logo">EDU<span>-TECH</span></div>
+        <div class="nav-label">
+            <span>●</span> LET'S LEARN!
+        </div>
+    </nav>
+</header>
+
+<main>
+
+    <!-- HERO SECTION -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="eyebrow">
+                ☁️ DATABASE LEARNING SPACE
+            </div>
+
+            <h1>
+                DATABASE<br>
+                <span>FUNDAMENTALS</span>
+            </h1>
+
+            <p class="hero-description">
+                Welcome to your database learning adventure!
+                Discover how data is stored, organised and managed.
+                Learn the basics of databases in a friendly,
+                simple and interactive learning environment.
+            </p>
+
+            <a href="#lessons" class="primary-btn">
+                LET'S START LEARNING ✨
+            </a>
+
+        </div>
+
+        <div class="hero-image">
+
+            <img
+                src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=1200&q=85"
+                alt="Database technology and data systems"
+            >
+
+            <div class="floating-card">
+
+                <div class="database-icon">🗄️</div>
+
+                <div>
+                    <strong>Your Data Adventure</strong>
+                    <small>Organise it. Understand it. Master it!</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- INTRODUCTION -->
+
+    <section class="intro">
+
+        <div>
+            <div class="intro-label">✦ YOUR LEARNING JOURNEY</div>
+            <h2>Every Data Has a Story!</h2>
+        </div>
+
+        <p>
+            From tables and records to keys and relationships,
+            explore the building blocks of databases one lesson
+            at a time. Pick your language and enjoy learning!
+        </p>
+
+    </section>
+
+    <!-- VIDEO LESSONS -->
+
+    <section id="lessons">
+
+        <div class="section-heading">
+
+            <div class="section-pill">📚 VIDEO LIBRARY</div>
+
+            <h2>Choose Your Learning Path</h2>
+
+            <p>
+                Two languages, one exciting learning journey.
+                Select your preferred video below.
+            </p>
+
+        </div>
+
+        <!-- CHINESE -->
+
+        <div class="language-heading">
+
+            <h3>🇨🇳 Database Fundamentals</h3>
+
+            <span class="language-badge">BC · 中文教学</span>
+
+        </div>
+
+        <div class="video-grid">
+
+            <article class="video-card">
+
+                <div class="thumbnail">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=1000&q=85"
+                        alt="Database tables and data management"
+                        loading="lazy"
+                    >
+
+                    <span class="video-label">BC · CHINESE</span>
+
+                    <div class="play-button">▶</div>
+
+                </div>
+
+                <div class="video-info">
+
+                    <div class="module-label">
+                        MODULE 01 · 中文
+                    </div>
+
+                    <h4>Database Fundamentals</h4>
+
+                    <p>
+                        认识数据库的基本概念，了解数据、表格、
+                        记录、字段，以及数据库管理的基础知识。
+                    </p>
+
+                    <div class="video-meta">
+                        <span>🎬</span>
+                        <span>Chinese video lesson</span>
+                    </div>
+
+                    <button
+                        class="watch-btn"
+                        onclick="playLesson('bc')"
+                    >
+                        ▶ 开始学习 · Watch Video
+                    </button>
+
+                </div>
+
+            </article>
+
+        </div>
+
+        <!-- MALAY -->
+
+        <div class="language-heading bm-heading">
+
+            <h3>🇲🇾 Database Fundamentals</h3>
+
+            <span class="language-badge">BM · BAHASA MELAYU</span>
+
+        </div>
+
+        <div class="video-grid">
+
+            <article class="video-card bm-card">
+
+                <div class="thumbnail">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1000&q=85"
+                        alt="Learning database technology"
+                        loading="lazy"
+                    >
+
+                    <span class="video-label">BM · MELAYU</span>
+
+                    <div class="play-button">▶</div>
+
+                </div>
+
+                <div class="video-info">
+
+                    <div class="module-label">
+                        MODULE 02 · BAHASA MELAYU
+                    </div>
+
+                    <h4>Asas Pangkalan Data</h4>
+
+                    <p>
+                        Pelajari konsep asas pangkalan data,
+                        jadual, rekod, medan dan cara data
+                        disusun serta diuruskan.
+                    </p>
+
+                    <div class="video-meta">
+                        <span>🎬</span>
+                        <span>Video pembelajaran Bahasa Melayu</span>
+                    </div>
+
+                    <button
+                        class="watch-btn"
+                        onclick="playLesson('bm')"
+                    >
+                        ▶ Mula Belajar · Tonton Video
+                    </button>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+    <!-- VIDEO PLAYER -->
+
+    <section class="player-section" id="video-player">
+
+        <div class="player-heading">
+
+            <div class="section-pill">🎥 NOW PLAYING</div>
+
+            <h2 id="player-title">Ready to Learn?</h2>
+
+            <p>
+                Choose a video above and enjoy your database lesson.
+            </p>
+
+        </div>
+
+        <div class="player-container">
+
+            <div class="player-placeholder" id="placeholder">
+
+                <div class="placeholder-icon">▶</div>
+
+                <h4>Your Learning Space</h4>
+
+                <p>
+                    Your video will appear here.<br>
+                    Choose BC or BM to get started!
+                </p>
+
+            </div>
+
+            <video
+                id="main-video"
+                controls
+                playsinline
+                preload="metadata"
+            >
+                Your browser does not support video playback.
+            </video>
+
+        </div>
+
+        <p id="player-message">
+            💡 Tip: You can pause, replay and adjust the video
+            using the controls.
+        </p>
+
+    </section>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="footer-inner">
+
+        <div class="footer-logo">
+            EDU<span>-TECH</span> 🩵
+        </div>
+
+        <span>Learn something new every day!</span>
+
+        <span>DATABASE FUNDAMENTALS · 2026</span>
+
+    </div>
+
+</footer>
+
+<script>
+const videos = {
+    bc: {
+        title: "Database Fundamentals — Chinese",
+        file: "Database Chinese.mp4",
+        message: "中文教学视频已选择，祝你学习愉快！"
+    },
+
+    bm: {
+        title: "Database Fundamentals — Bahasa Melayu",
+        file: "Database Melayu.MOV",
+        message: "Video Bahasa Melayu telah dipilih. Selamat belajar!"
+    }
+};
+
+function playLesson(language) {
+
+    const lesson = videos[language];
+
+    const player = document.getElementById("main-video");
+    const placeholder = document.getElementById("placeholder");
+    const title = document.getElementById("player-title");
+    const message = document.getElementById("player-message");
+
+    if (!lesson) return;
+
+    player.pause();
+
+    // Use the exact video filename supplied
+    player.src = lesson.file;
+
+    player.style.display = "block";
+    placeholder.style.display = "none";
+
+    title.textContent = lesson.title;
+    message.textContent = lesson.message;
+
+    player.load();
+
+    player.play().catch(() => {
+        message.textContent =
+            "Your video is selected! Press Play to start watching.";
+    });
+
+    document.getElementById("video-player").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
+// Handle video loading errors
+document.getElementById("main-video").addEventListener("error", function () {
+
+    const player = document.getElementById("main-video");
+    const placeholder = document.getElementById("placeholder");
+
+    player.style.display = "none";
+    placeholder.style.display = "flex";
+
+    placeholder.querySelector("h4").textContent =
+        "Oops! Video Not Found";
+
+    placeholder.querySelector("p").innerHTML =
+        "Please check your video filename and folder.<br>" +
+        "Make sure the video is next to index.html.";
+
+    document.getElementById("player-message").textContent =
+        "If the video is in another folder, update its path in the JavaScript section.";
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1182 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Basic Math | EDU-TECH</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --purple: #8574d9;
+    --purple-dark: #6554b4;
+    --lavender: #eeeaff;
+    --blue: #dff3ff;
+    --pink: #ffe8f0;
+    --cream: #fffdf9;
+    --ink: #302c49;
+    --muted: #827e9b;
+    --border: #e9e4f5;
+    --shadow: 0 14px 40px rgba(87, 72, 140, 0.09);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Nunito", "Segoe UI", sans-serif;
+    color: var(--ink);
+    background:
+        radial-gradient(ellipse at 0% 0%, #eee8ff 0, transparent 34%),
+        radial-gradient(ellipse at 100% 20%, #e5f5ff 0, transparent 30%),
+        #fbfaff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+button {
+    font: inherit;
+}
+
+.container {
+    width: min(1120px, 91%);
+    margin: auto;
+}
+
+/* NAVIGATION */
+
+.navbar {
+    height: 88px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-logo {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border-radius: 16px;
+    background: linear-gradient(140deg, #c7baff, #a4dfff);
+    color: #51458f;
+    font-size: 25px;
+    font-weight: 900;
+    box-shadow: 0 7px 18px #a89ce52e;
+}
+
+.brand h2 {
+    font-size: 19px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.brand p {
+    margin-top: 2px;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.nav-pill {
+    padding: 9px 15px;
+    border: 1px solid #e8e0fa;
+    background: #ffffffb8;
+    color: var(--purple-dark);
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+/* HERO */
+
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 0.9fr;
+    align-items: center;
+    gap: 50px;
+    padding: 55px 0 45px;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--purple-dark);
+    background: #eee9ff;
+    border: 1px solid #e3dafd;
+    padding: 8px 13px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.eyebrow span {
+    font-size: 14px;
+}
+
+.hero h1 {
+    margin: 22px 0 16px;
+    font-size: clamp(42px, 5vw, 65px);
+    line-height: 1.08;
+    letter-spacing: -2px;
+    font-weight: 900;
+}
+
+.gradient-text {
+    background: linear-gradient(90deg, #8b78df, #65b8dc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero-description {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.9;
+    max-width: 470px;
+}
+
+.hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 27px;
+}
+
+.primary-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    border: none;
+    border-radius: 13px;
+    padding: 14px 21px;
+    background: linear-gradient(110deg, #9180e4, #8fbae8);
+    color: white;
+    font-weight: 900;
+    box-shadow: 0 8px 20px #9482df35;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.primary-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px #9482df45;
+}
+
+.hero-note {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* HERO ARTWORK */
+
+.hero-art {
+    position: relative;
+    padding: 10px;
+}
+
+.art-frame {
+    position: relative;
+    overflow: hidden;
+    height: 355px;
+    border-radius: 29px;
+    background: #e9e2ff;
+    box-shadow: 0 22px 55px #8374c51c;
+    border: 7px solid #ffffff;
+    transform: rotate(1deg);
+}
+
+.art-frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.art-frame::after {
+    content: "";
+    position: absolute;
+    inset: 45% 0 0;
+    background: linear-gradient(transparent, #27213b9c);
+    pointer-events: none;
+}
+
+.art-caption {
+    position: absolute;
+    z-index: 2;
+    bottom: 23px;
+    left: 23px;
+    right: 23px;
+    color: white;
+}
+
+.art-caption h3 {
+    font-size: 22px;
+    font-weight: 900;
+}
+
+.art-caption p {
+    margin-top: 5px;
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+.float-sticker {
+    position: absolute;
+    z-index: 3;
+    display: grid;
+    place-items: center;
+    border: 5px solid #fff;
+    border-radius: 19px;
+    box-shadow: var(--shadow);
+    font-weight: 900;
+}
+
+.sticker-one {
+    width: 67px;
+    height: 67px;
+    left: -14px;
+    top: 37px;
+    background: #ffe8f0;
+    color: #b56a91;
+    font-size: 25px;
+    transform: rotate(-9deg);
+}
+
+.sticker-two {
+    width: 64px;
+    height: 64px;
+    right: -8px;
+    top: 115px;
+    background: #dff3ff;
+    color: #568bb0;
+    font-size: 25px;
+    transform: rotate(9deg);
+}
+
+.sticker-three {
+    position: absolute;
+    right: 5px;
+    bottom: -3px;
+    color: #b08a45;
+    font-size: 30px;
+    transform: rotate(12deg);
+}
+
+/* QUICK STATS */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 25px 0 58px;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 21px;
+    background: #ffffffc9;
+    border: 1px solid var(--border);
+    border-radius: 19px;
+    box-shadow: 0 8px 25px #8070bb09;
+}
+
+.stat-icon {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    font-size: 21px;
+}
+
+.stat:nth-child(1) .stat-icon {
+    background: var(--lavender);
+}
+
+.stat:nth-child(2) .stat-icon {
+    background: var(--blue);
+}
+
+.stat:nth-child(3) .stat-icon {
+    background: var(--pink);
+}
+
+.stat h3 {
+    font-size: 23px;
+    font-weight: 900;
+}
+
+.stat p {
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.7px;
+    margin-top: 3px;
+}
+
+/* TOPICS */
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    margin-bottom: 23px;
+}
+
+.section-kicker {
+    color: var(--purple-dark);
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.section-heading h2 {
+    font-size: clamp(25px, 3vw, 34px);
+    font-weight: 900;
+    letter-spacing: -0.6px;
+}
+
+.section-heading p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+    margin-top: 7px;
+}
+
+.topic-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 58px;
+}
+
+.topic {
+    border: 1px solid var(--border);
+    background: #ffffffc9;
+    padding: 19px;
+    border-radius: 18px;
+    transition: 0.25s;
+}
+
+.topic:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+}
+
+.topic-icon {
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.topic:nth-child(1) .topic-icon {
+    background: var(--lavender);
+}
+
+.topic:nth-child(2) .topic-icon {
+    background: var(--pink);
+}
+
+.topic:nth-child(3) .topic-icon {
+    background: var(--blue);
+}
+
+.topic:nth-child(4) .topic-icon {
+    background: #fff0d9;
+}
+
+.topic h3 {
+    font-size: 14px;
+    font-weight: 900;
+    margin-bottom: 7px;
+}
+
+.topic p {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+/* VIDEO LESSONS */
+
+.lesson-section {
+    padding-bottom: 65px;
+}
+
+.lesson-panel {
+    padding: 27px;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #f0ecff, #eef8ff);
+    border: 1px solid #e7e4f6;
+}
+
+.lesson-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 23px;
+}
+
+.lesson-heading h2 {
+    font-size: 24px;
+    font-weight: 900;
+}
+
+.lesson-heading p {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 6px;
+    line-height: 1.6;
+}
+
+.available-pill {
+    white-space: nowrap;
+    padding: 8px 12px;
+    background: white;
+    border: 1px solid #e4dff5;
+    border-radius: 30px;
+    color: var(--purple-dark);
+    font-size: 11px;
+    font-weight: 900;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.video-card {
+    overflow: hidden;
+    border-radius: 19px;
+    background: white;
+    border: 1px solid #e8e3f2;
+    box-shadow: 0 8px 25px #62518e0b;
+    transition: 0.25s;
+}
+
+.video-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 35px #62518e18;
+}
+
+.video-cover {
+    position: relative;
+    height: 190px;
+    overflow: hidden;
+    background: #e9e3fa;
+}
+
+.video-cover img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+}
+
+.video-card:hover .video-cover img {
+    transform: scale(1.05);
+}
+
+.video-cover::after {
+    content: "";
+    position: absolute;
+    inset: 45% 0 0;
+    background: linear-gradient(transparent, #25203960);
+    pointer-events: none;
+}
+
+.language-badge {
+    position: absolute;
+    z-index: 2;
+    top: 13px;
+    left: 13px;
+    padding: 8px 11px;
+    border-radius: 9px;
+    background: #ffffffed;
+    color: #6656a6;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+}
+
+.cover-decoration {
+    position: absolute;
+    z-index: 2;
+    bottom: 12px;
+    right: 16px;
+    color: white;
+    font-size: 28px;
+    font-weight: 900;
+    text-shadow: 0 2px 12px #0004;
+}
+
+.video-info {
+    padding: 21px;
+}
+
+.video-info h3 {
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 8px;
+}
+
+.video-info p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+    min-height: 43px;
+    overflow-wrap: anywhere;
+}
+
+.video-meta {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 13px;
+}
+
+.video-meta span:first-child {
+    color: #6c5bb2;
+    font-weight: 900;
+}
+
+.watch-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 18px;
+    padding: 13px;
+    border: 0;
+    border-radius: 12px;
+    color: white;
+    background: linear-gradient(100deg, #9180db, #8db9df);
+    font-size: 13px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.watch-btn:hover {
+    filter: brightness(1.05);
+    transform: translateY(-2px);
+}
+
+.video-card.chinese .watch-btn {
+    background: linear-gradient(100deg, #d49bb8, #a69be4);
+}
+
+/* STUDY TIP */
+
+.study-tip {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    padding: 22px;
+    margin-top: 23px;
+    border-radius: 18px;
+    border: 1px dashed #d9d0f0;
+    background: #ffffff9c;
+}
+
+.tip-icon {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 15px;
+    background: #fff0d9;
+    font-size: 23px;
+}
+
+.study-tip h3 {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.study-tip p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* VIDEO MODAL */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: #242039c9;
+    backdrop-filter: blur(9px);
+}
+
+.modal.open {
+    display: flex;
+}
+
+.modal-box {
+    width: min(900px, 100%);
+    padding: 22px;
+    border-radius: 23px;
+    background: #fffdfd;
+    border: 1px solid white;
+    box-shadow: 0 25px 80px #15102745;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 17px;
+}
+
+.modal-header h2 {
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.modal-header p {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 6px;
+    overflow-wrap: anywhere;
+}
+
+.close-btn {
+    flex-shrink: 0;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    background: #f5f2ff;
+    color: var(--purple-dark);
+    padding: 10px 13px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.video-player {
+    display: block;
+    width: 100%;
+    max-height: 65vh;
+    border-radius: 14px;
+    background: #181525;
+}
+
+.player-note {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.7;
+    margin-top: 12px;
+}
+
+/* FOOTER */
+
+footer {
+    border-top: 1px solid #e8e2f3;
+    padding: 25px 0 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.footer-brand {
+    color: var(--purple-dark);
+    font-weight: 900;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 850px) {
+    .hero {
+        gap: 25px;
+    }
+
+    .art-frame {
+        height: 290px;
+    }
+
+    .topic-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stats {
+        gap: 10px;
+    }
+
+    .stat {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        height: 75px;
+    }
+
+    .nav-pill {
+        display: none;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+        padding-top: 30px;
+    }
+
+    .hero h1 {
+        letter-spacing: -1px;
+    }
+
+    .art-frame {
+        height: 270px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+        margin-bottom: 45px;
+    }
+
+    .stat {
+        padding: 14px;
+    }
+
+    .stat-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .topic-grid {
+        gap: 10px;
+    }
+
+    .topic {
+        padding: 15px;
+    }
+
+    .lesson-panel {
+        padding: 16px;
+    }
+
+    .lesson-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .video-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .video-cover {
+        height: 205px;
+    }
+
+    .study-tip {
+        align-items: flex-start;
+        padding: 16px;
+    }
+
+    .modal-box {
+        padding: 14px;
+    }
+
+    .modal-header h2 {
+        font-size: 16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- NAVIGATION -->
+    <header class="navbar">
+        <div class="brand">
+            <div class="brand-logo">∑</div>
+            <div>
+                <h2>EDU-TECH</h2>
+                <p>BASIC MATH STUDIO</p>
+            </div>
+        </div>
+
+        <div class="nav-pill">✦ Learn at your own pace</div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+
+            <div class="eyebrow">
+                <span>✧</span> Mathematics Made Simple
+            </div>
+
+            <h1>
+                A Little Math,<br>
+                <span class="gradient-text">A Lot of Magic.</span>
+            </h1>
+
+            <p class="hero-description">
+                Numbers are more than just numbers.
+                Explore the wonderful world of mathematics
+                through simple lessons in Bahasa Melayu
+                and Chinese. Let's learn something new today!
+            </p>
+
+            <div class="hero-actions">
+                <button class="primary-btn"
+                    onclick="scrollToLessons()">
+                    ▶ Start Learning
+                </button>
+
+                <span class="hero-note">
+                    ♡ One step at a time
+                </span>
+            </div>
+        </div>
+
+        <div class="hero-art">
+            <div class="float-sticker sticker-one">∑</div>
+            <div class="float-sticker sticker-two">π</div>
+
+            <div class="art-frame">
+                <img
+                    src="https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=1000&q=85"
+                    alt="Mathematics exercises and calculations"
+                    onerror="this.style.display='none'">
+
+                <div class="art-caption">
+                    <h3>Make Every Number Count.</h3>
+                    <p>Understand it. Practise it. Master it.</p>
+                </div>
+            </div>
+
+            <div class="sticker-three">✦</div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats">
+        <div class="stat">
+            <div class="stat-icon">📚</div>
+            <div>
+                <h3>02</h3>
+                <p>VIDEO LESSONS</p>
+            </div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">🌏</div>
+            <div>
+                <h3>02</h3>
+                <p>LANGUAGE OPTIONS</p>
+            </div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">✎</div>
+            <div>
+                <h3>04</h3>
+                <p>CORE TOPICS</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TOPICS -->
+    <section>
+        <div class="section-heading">
+            <div>
+                <div class="section-kicker">Your learning roadmap</div>
+                <h2>What We'll Explore ✨</h2>
+                <p>A quick look at the concepts in Basic Mathematics.</p>
+            </div>
+        </div>
+
+        <div class="topic-grid">
+            <article class="topic">
+                <div class="topic-icon">🔢</div>
+                <h3>Numbering System</h3>
+                <p>Decimal, binary, octal and number conversions.</p>
+            </article>
+
+            <article class="topic">
+                <div class="topic-icon">♡</div>
+                <h3>Sets & Relations</h3>
+                <p>Discover sets, relationships and their properties.</p>
+            </article>
+
+            <article class="topic">
+                <div class="topic-icon">ƒ(x)</div>
+                <h3>Functions</h3>
+                <p>Understand different functions and how they work.</p>
+            </article>
+
+            <article class="topic">
+                <div class="topic-icon">📈</div>
+                <h3>Graphs</h3>
+                <p>Explore coordinates, graph types and relationships.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- VIDEO LESSONS -->
+    <section class="lesson-section" id="lessons">
+        <div class="lesson-panel">
+
+            <div class="lesson-heading">
+                <div>
+                    <div class="section-kicker">Pick your language</div>
+                    <h2>Your Basic Math Lessons</h2>
+                    <p>Same subject, two ways to learn. Choose what feels right for you.</p>
+                </div>
+
+                <div class="available-pill">✦ 2 Lessons Available</div>
+            </div>
+
+            <div class="video-grid">
+
+                <!-- BM -->
+                <article class="video-card">
+                    <div class="video-cover">
+                        <img
+                            src="https://images.unsplash.com/photo-1596495578065-6e0763fa1178?auto=format&fit=crop&w=800&q=85"
+                            alt="Mathematics lesson in Malay"
+                            loading="lazy"
+                            onerror="this.style.display='none'">
+
+                        <span class="language-badge">
+                            🇲🇾 BAHASA MELAYU
+                        </span>
+
+                        <span class="cover-decoration">∑ + π</span>
+                    </div>
+
+                    <div class="video-info">
+                        <h3>Basic Math — BM</h3>
+
+                        <p>
+                            Pelajari sistem nombor, set, hubungan,
+                            fungsi dan graf melalui penerangan
+                            dalam Bahasa Melayu.
+                        </p>
+
+                        <div class="video-meta">
+                            <span>BM</span>
+                            <span>•</span>
+                            <span>Video lesson</span>
+                        </div>
+
+                        <button class="watch-btn"
+                            onclick="playVideo('bm')">
+                            ▶ &nbsp; Tonton Video BM
+                        </button>
+                    </div>
+                </article>
+
+                <!-- BC -->
+                <article class="video-card chinese">
+                    <div class="video-cover">
+                        <img
+                            src="https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=800&q=85"
+                            alt="Mathematics lesson in Chinese"
+                            loading="lazy"
+                            onerror="this.style.display='none'">
+
+                        <span class="language-badge">
+                            🇨🇳 中文 CHINESE
+                        </span>
+
+                        <span class="cover-decoration">∞ ÷ π</span>
+                    </div>
+
+                    <div class="video-info">
+                        <h3>Basic Math — BC</h3>
+
+                        <p>
+                            通过中文讲解学习进制转换、集合与关系、
+                            函数和图像，一步一步掌握基础数学。
+                        </p>
+
+                        <div class="video-meta">
+                            <span>BC</span>
+                            <span>•</span>
+                            <span>中文课程</span>
+                        </div>
+
+                        <button class="watch-btn"
+                            onclick="playVideo('bc')">
+                            ▶ &nbsp; 观看中文课程
+                        </button>
+                    </div>
+                </article>
+
+            </div>
+
+            <div class="study-tip">
+                <div class="tip-icon">💡</div>
+                <div>
+                    <h3>A tiny study tip</h3>
+                    <p>
+                        Don't worry if a topic seems difficult at first.
+                        Watch the lesson, pause when you need to,
+                        and practise one question at a time.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <span class="footer-brand">∑ EDU-TECH</span>
+        <span>Made with care for curious minds ♡</span>
+        <span>© 2026 Basic Math</span>
+    </footer>
+
+</div>
+
+<!-- VIDEO PLAYER -->
+<div class="modal" id="videoModal">
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <div>
+                <h2 id="modalTitle">Basic Math</h2>
+                <p id="modalFilename"></p>
+            </div>
+
+            <button class="close-btn" onclick="closeVideo()">
+                ✕ Close
+            </button>
+        </div>
+
+        <video
+            id="videoPlayer"
+            class="video-player"
+            controls
+            playsinline
+            preload="metadata">
+            Your browser does not support video playback.
+        </video>
+
+        <p class="player-note">
+            If the video doesn't play, check the filename
+            and make sure the video is inside the videos folder.
+            Some browsers may not support every MOV format.
+        </p>
+    </div>
+</div>
+
+<script>
+const videos = {
+    bm: {
+        title: "Basic Math — Bahasa Melayu",
+        filename: "BasicMath Melayu.MOV"
+    },
+
+    bc: {
+        title: "Basic Math — Chinese",
+        filename: "BasicMath Chinese.mp4"
+    }
+};
+
+function scrollToLessons() {
+    document.getElementById("lessons").scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
+function playVideo(language) {
+    const video = videos[language];
+    const player = document.getElementById("videoPlayer");
+
+    document.getElementById("modalTitle").textContent =
+        video.title;
+
+    document.getElementById("modalFilename").textContent =
+        video.filename;
+
+    player.src = "videos/" + encodeURIComponent(video.filename);
+    player.load();
+
+    document.getElementById("videoModal").classList.add("open");
+}
+
+function closeVideo() {
+    const player = document.getElementById("videoPlayer");
+
+    player.pause();
+    player.removeAttribute("src");
+    player.load();
+
+    document.getElementById("videoModal").classList.remove("open");
+}
+
+document.getElementById("videoModal").addEventListener("click", function(event) {
+    if (event.target === this) {
+        closeVideo();
+    }
+});
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        closeVideo();
+    }
+});
+</script>
+
+</body>
+</html>

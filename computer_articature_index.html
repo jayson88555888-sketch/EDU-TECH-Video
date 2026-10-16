@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Computer Architecture | EDU-TECH</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg: #080b13;
+    --panel: #111827;
+    --cyan: #65f5e7;
+    --purple: #ad91ff;
+    --white: #f5f7ff;
+    --muted: #a2aec3;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background:
+        linear-gradient(rgba(101,245,231,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(101,245,231,.035) 1px, transparent 1px);
+    background-size: 38px 38px;
+}
+
+.glow {
+    position: fixed;
+    width: 450px;
+    height: 450px;
+    top: 120px;
+    right: -150px;
+    border-radius: 50%;
+    background: rgba(100, 65, 210, .15);
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: -1;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(8,11,19,.92);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid #242b3b;
+}
+
+.nav {
+    max-width: 1250px;
+    margin: auto;
+    padding: 20px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: var(--cyan);
+}
+
+.system {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--muted);
+}
+
+.dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 12px var(--cyan);
+    margin-right: 7px;
+}
+
+main {
+    max-width: 1250px;
+    margin: auto;
+    padding: 0 28px;
+}
+
+/* HERO */
+
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    padding: 60px 0 55px;
+}
+
+.tag {
+    color: var(--cyan);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: 22px;
+}
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(32px, 4.4vw, 57px);
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+h1 span {
+    color: var(--cyan);
+    text-shadow: 0 0 25px rgba(101,245,231,.2);
+}
+
+.hero p {
+    color: var(--muted);
+    line-height: 1.9;
+    font-size: 14px;
+    max-width: 480px;
+    margin-bottom: 25px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 13px 20px;
+    background: var(--cyan);
+    color: #071011;
+    text-decoration: none;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    border-radius: 5px;
+    transition: .25s;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px #65f5e744;
+}
+
+.hero-picture {
+    position: relative;
+    height: 330px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #65f5e744;
+    box-shadow: 0 15px 55px #0005;
+}
+
+.hero-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(.65) saturate(.8);
+    transition: .5s;
+}
+
+.hero-picture:hover img {
+    transform: scale(1.05);
+    filter: brightness(.85);
+}
+
+.hero-picture::after {
+    content: "SYSTEM ARCHITECTURE // ACCESS GRANTED";
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: var(--cyan);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+/* SECTION HEADINGS */
+
+.section-heading {
+    padding: 32px 0 22px;
+    border-top: 1px solid #252c3a;
+}
+
+.section-heading .tag {
+    margin-bottom: 12px;
+}
+
+h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(23px, 3vw, 32px);
+}
+
+.description {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+    margin-top: 12px;
+}
+
+/* LANGUAGE HEADINGS */
+
+.language-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin: 30px 0 20px;
+}
+
+.language-title h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 19px;
+}
+
+.language-title span {
+    color: var(--cyan);
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.bm-title span {
+    color: var(--purple);
+}
+
+/* VIDEO CARDS */
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.video-card {
+    background: rgba(17,24,39,.94);
+    border: 1px solid #293247;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: .3s;
+}
+
+.video-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--cyan);
+    box-shadow: 0 12px 35px #0005;
+}
+
+.bm-card:hover {
+    border-color: var(--purple);
+}
+
+.thumbnail {
+    position: relative;
+    height: 225px;
+    overflow: hidden;
+    background: #0d1420;
+}
+
+.thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(.7);
+    transition: .4s;
+}
+
+.video-card:hover .thumbnail img {
+    transform: scale(1.06);
+    filter: brightness(.9);
+}
+
+.play {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 55px;
+    height: 55px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    background: #080b13cc;
+    border-radius: 50%;
+    font-size: 17px;
+    box-shadow: 0 0 22px #65f5e722;
+}
+
+.bm-card .play {
+    border-color: var(--purple);
+    color: var(--purple);
+}
+
+.badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 7px 11px;
+    border-radius: 4px;
+    background: var(--cyan);
+    color: #071011;
+    font-size: 10px;
+    font-weight: 800;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.badge.bm {
+    background: var(--purple);
+}
+
+.video-info {
+    padding: 22px;
+}
+
+.video-info small {
+    color: var(--cyan);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.bm-card .video-info small {
+    color: var(--purple);
+}
+
+.video-info h4 {
+    font-size: 18px;
+    margin: 12px 0;
+    line-height: 1.5;
+}
+
+.video-info p {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--muted);
+}
+
+.watch {
+    width: 100%;
+    padding: 13px;
+    margin-top: 20px;
+    background: transparent;
+    border: 1px solid #65f5e777;
+    border-radius: 4px;
+    color: var(--cyan);
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 11px;
+    transition: .2s;
+}
+
+.bm-card .watch {
+    color: var(--purple);
+    border-color: #ad91ff77;
+}
+
+.watch:hover {
+    background: var(--cyan);
+    color: #071011;
+}
+
+.bm-card .watch:hover {
+    background: var(--purple);
+    color: #100b1d;
+}
+
+/* VIDEO PLAYER */
+
+.player-section {
+    padding: 65px 0;
+    margin-top: 45px;
+    border-top: 1px solid #252c3a;
+}
+
+.player-heading {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.player-heading p {
+    color: var(--muted);
+    margin-top: 12px;
+    font-size: 13px;
+}
+
+.player {
+    position: relative;
+    max-width: 900px;
+    margin: auto;
+    background: #03050a;
+    border: 1px solid #65f5e755;
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    box-shadow: 0 0 40px #65f5e70a;
+}
+
+.player video {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    display: none;
+    background: #000;
+}
+
+.placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    text-align: center;
+    padding: 20px;
+    background: radial-gradient(ellipse, #65f5e714, transparent 65%);
+}
+
+.placeholder .play {
+    position: static;
+    transform: none;
+    width: 60px;
+    height: 60px;
+}
+
+.placeholder h4 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.placeholder p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+#player-message {
+    max-width: 900px;
+    margin: 12px auto 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+footer {
+    margin-top: 20px;
+    border-top: 1px solid #252c3a;
+    padding: 30px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+footer strong {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--cyan);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 800px) {
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .hero-picture {
+        height: 280px;
+    }
+
+    .video-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .thumbnail {
+        height: 230px;
+    }
+}
+
+@media (max-width: 480px) {
+    main {
+        padding: 0 17px;
+    }
+
+    .nav {
+        padding: 18px 17px;
+    }
+
+    .logo {
+        font-size: 16px;
+    }
+
+    .system {
+        font-size: 8px;
+    }
+
+    .hero {
+        padding: 42px 0;
+    }
+
+    .hero-picture {
+        height: 220px;
+    }
+
+    .language-title h3 {
+        font-size: 14px;
+    }
+
+    .language-title span {
+        font-size: 9px;
+    }
+
+    .thumbnail {
+        height: 190px;
+    }
+
+    .video-info {
+        padding: 18px;
+    }
+
+    footer {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="glow"></div>
+
+<header>
+    <nav class="nav">
+        <div class="logo">EDU<span>-TECH</span></div>
+        <div class="system">
+            <span class="dot"></span>SYSTEM ONLINE
+        </div>
+    </nav>
+</header>
+
+<main>
+
+    <!-- HERO SECTION -->
+
+    <section class="hero">
+
+        <div>
+            <div class="tag">✦ DIGITAL LEARNING LAB</div>
+
+            <h1>
+                COMPUTER<br>
+                <span>ARCHITECTURE</span>
+            </h1>
+
+            <p>
+                Explore the hidden world inside your computer.
+                Discover the CPU, memory, storage, and electronic
+                components that power every digital system.
+                Your journey into the machine starts here.
+            </p>
+
+            <a href="#lessons" class="btn">
+                EXPLORE LESSONS ↘
+            </a>
+        </div>
+
+        <div class="hero-picture">
+            <img
+                src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=85"
+                alt="Computer motherboard and electronic circuits"
+            >
+        </div>
+
+    </section>
+
+    <!-- LESSONS -->
+
+    <section id="lessons">
+
+        <div class="section-heading">
+            <div class="tag">01 / KNOW YOUR MACHINE</div>
+
+            <h2>Learning Database</h2>
+
+            <p class="description">
+                Choose your preferred language and enter the digital lab.
+                Two languages, one learning experience.
+            </p>
+        </div>
+
+        <!-- CHINESE VIDEO -->
+
+        <div class="language-title">
+            <h3>Computer Architecture — BC</h3>
+            <span>中文教学 / BC</span>
+        </div>
+
+        <div class="video-grid">
+
+            <article class="video-card">
+
+                <div class="thumbnail">
+                    <img
+                        src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=85"
+                        alt="Computer motherboard"
+                        loading="lazy"
+                    >
+
+                    <span class="badge">BC · 中文</span>
+                    <div class="play">▶</div>
+                </div>
+
+                <div class="video-info">
+
+                    <small>MODULE 01 · CHINESE</small>
+
+                    <h4>Computer Architecture</h4>
+
+                    <p>
+                        学习计算机架构的基本概念，认识 CPU、
+                        内存和计算机的主要组成部分。
+                    </p>
+
+                    <button
+                        class="watch"
+                        onclick="playLesson('bc')"
+                    >
+                        ▶ 播放中文视频
+                    </button>
+
+                </div>
+            </article>
+
+        </div>
+
+        <!-- MALAY VIDEO -->
+
+        <div class="language-title bm-title">
+            <h3>Computer Architecture — BM</h3>
+            <span>BAHASA MELAYU / BM</span>
+        </div>
+
+        <div class="video-grid">
+
+            <article class="video-card bm-card">
+
+                <div class="thumbnail">
+                    <img
+                        src="https://images.unsplash.com/photo-1555617981-dac3880eac6e?auto=format&fit=crop&w=900&q=85"
+                        alt="Computer processor and hardware"
+                        loading="lazy"
+                    >
+
+                    <span class="badge bm">BM · MELAYU</span>
+                    <div class="play">▶</div>
+                </div>
+
+                <div class="video-info">
+
+                    <small>MODULE 02 · BAHASA MELAYU</small>
+
+                    <h4>Seni Bina Komputer</h4>
+
+                    <p>
+                        Pelajari konsep seni bina komputer, CPU,
+                        memori dan komponen utama sistem komputer.
+                    </p>
+
+                    <button
+                        class="watch"
+                        onclick="playLesson('bm')"
+                    >
+                        ▶ Tonton Video BM
+                    </button>
+
+                </div>
+            </article>
+
+        </div>
+
+    </section>
+
+    <!-- VIDEO PLAYER -->
+
+    <section class="player-section" id="video-player">
+
+        <div class="player-heading">
+
+            <div class="tag">02 / TRANSMISSION ROOM</div>
+
+            <h2 id="player-title">Choose Your Lesson</h2>
+
+            <p>
+                Select a lesson above to start watching.
+            </p>
+
+        </div>
+
+        <div class="player">
+
+            <div class="placeholder" id="placeholder">
+
+                <div class="play">▶</div>
+
+                <h4>AWAITING VIDEO TRANSMISSION</h4>
+
+                <p>
+                    Your lesson is waiting in the system.
+                    Select BC or BM to begin.
+                </p>
+
+            </div>
+
+            <video
+                id="main-video"
+                controls
+                playsinline
+                preload="metadata"
+            >
+                Your browser does not support video playback.
+            </video>
+
+        </div>
+
+        <p id="player-message">
+            Select a video lesson above to play it here.
+        </p>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <strong>EDU-TECH</strong>
+
+        <span>
+            Knowledge is power. Understand the machine.
+        </span>
+
+        <span>SYS.ARCH // 2026</span>
+
+    </footer>
+
+</main>
+
+<script>
+const videos = {
+    bc: {
+        title: "Computer Architecture — Chinese",
+        file: "ComputerArticature Chinese.mp4",
+        language: "中文教学视频已选择。"
+    },
+
+    bm: {
+        title: "Computer Architecture — Bahasa Melayu",
+        file: "ComputerArticature Melayu.MOV",
+        language: "Video Bahasa Melayu telah dipilih."
+    }
+};
+
+function playLesson(language) {
+
+    const lesson = videos[language];
+
+    const player = document.getElementById("main-video");
+    const placeholder = document.getElementById("placeholder");
+    const title = document.getElementById("player-title");
+    const message = document.getElementById("player-message");
+
+    if (!lesson) return;
+
+    // Stop the previous video
+    player.pause();
+
+    // Set the selected video
+    player.src = lesson.file;
+    player.style.display = "block";
+
+    placeholder.style.display = "none";
+
+    title.textContent = lesson.title;
+    message.textContent = lesson.language;
+
+    player.load();
+
+    // Attempt to start playback
+    player.play().catch(() => {
+        message.textContent =
+            "Video loaded. Press Play if playback does not start automatically.";
+    });
+
+    // Move down to the video player
+    document.getElementById("video-player").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
+// Show a helpful message if the selected video cannot load
+document.getElementById("main-video").addEventListener(
+    "error",
+    function () {
+
+        const player = document.getElementById("main-video");
+        const placeholder = document.getElementById("placeholder");
+
+        player.style.display = "none";
+        placeholder.style.display = "flex";
+
+        placeholder.querySelector("h4").textContent =
+            "VIDEO SIGNAL NOT FOUND";
+
+        placeholder.querySelector("p").textContent =
+            "Check your video filename and folder location.";
+
+        document.getElementById("player-message").textContent =
+            "Make sure the video files are in the same folder as index.html.";
+    }
+);
+</script>
+
+</body>
+</html>
